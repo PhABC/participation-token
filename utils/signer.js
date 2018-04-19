@@ -31,7 +31,7 @@ function toHexPad64(uint){
   @param amount Amount of tokens that participants can redeem for a given event
   @param nonce Event ID number
 */
-function massSign(contractAddress, addresses, amount, nonce){
+async function massSign(contractAddress, addresses, amount, nonce){
   var add;   // Address without 0x
   var add0x; // Address with 0x
   var m;     // Signed message
@@ -59,7 +59,7 @@ function massSign(contractAddress, addresses, amount, nonce){
       add0x = '0x'+ add;
     }
 
-    // Signed message
+    // hashed message
     m = Web3Utils.soliditySha3(
                 contractAddress,
                 add,
@@ -67,13 +67,16 @@ function massSign(contractAddress, addresses, amount, nonce){
                 nonce
         ); 
 
+    // Signing message
+    sig = //
+
     // Encoding each argument
     encodedAddr   = Web3Utils.padLeft(add, 64); 
     encodedAmount = toHexPad64(amount).substr(2);
     encodedNonce  = toHexPad64(nonce).substr(2);
 
     // The byte code to pass as msg.data for users to redeem their tokens
-    encodedFunctionCall = methodID + encodedAddr + encodedAmount + encodedNonce + m;
+    encodedFunctionCall = methodID + encodedAddr + encodedAmount + encodedNonce + sig;
     
     //Storing signed message for each address (overwrites duplicated addresses)
     encodedFunctionCalls[add0x] = encodedFunctionCall;
@@ -84,7 +87,7 @@ return encodedFunctionCalls;
 
 
 //Example
-/*
+
 var amount = 69;
 var nonce  = 1;
 var contract = '0x0000000000000000000000000000000000000000';
@@ -106,4 +109,3 @@ for (var i = 0; i < addresses.length; i++){
   console.log(i, calls[addresses[i]]);
 }
 
-*/
