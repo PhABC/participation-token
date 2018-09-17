@@ -9,7 +9,7 @@ Participation tokens have no intrinsic values, but could be used by communities 
 + Organize an annual lottery based on annual participation score
 + Create a priority list for events with restricted number of participants, where users with most tokens are prioritized.
 + Act as a publicly available social metric of "how involved" in a certain community someone is. 
-+ "Proof" of participation orcacle
++ "Proof" of participation oracle
 
 # Participation Token issuance logic
 
